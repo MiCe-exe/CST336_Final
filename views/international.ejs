@@ -1,0 +1,100 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container p-4 my-4 bg-light rounded-5">
+  <h1>Search International</h1>
+  <h4>Powered by Adzuna API</h4>
+    
+  <!-- Search Form -->
+  <form action="/global" method="get">
+    <div class="form-group">
+      <label for="keywords">Keywords:</label>
+      <input type="text" class="form-control" id="keywords" name="keywords" placeholder="Enter keywords" required><br>
+      <div class="form-group">
+        <label for="country">Country:</label>
+        <select class="form-control" id="country" name="country">
+          <option value="gb">United Kingdom</option>
+          <option value="us">United States</option>
+          <option value="at">Austria</option>
+          <option value="au">Australia</option>
+          <option value="be">Belgium</option>
+          <option value="br">Brazil</option>
+          <option value="ca">Canada</option>
+          <option value="ch">Switzerland</option>
+          <option value="de">Germany</option>
+          <option value="es">Spain</option>
+          <option value="fr">France</option>
+          <option value="in">India</option>
+          <option value="it">Italy</option>
+          <option value="mx">Mexico</option>
+          <option value="nl">Netherlands</option>
+          <option value="nz">New Zealand</option>
+          <option value="pl">Poland</option>
+          <option value="sg">Singapore</option>
+          <option value="za">South Africa</option>
+        </select>
+      </div>
+    </div><br>
+    <div class="form-group">
+      <label for="location">Location:</label>
+      <input type="text" class="form-control" id="location" name="location" placeholder="Enter place names, postal codes, etc." required>
+    </div><br>
+    <div class="form-group">
+      <label for="distance">Radius (in kilometers):</label>
+      <input type="text" class="form-control" id="distance" name="distance" placeholder="Enter radius" required>
+    </div><br>
+    <button type="button" class="btn btn-primary button-55" onclick="search()">Search</button>
+  </form>
+</div>
+  
+<!-- Search Results -->
+  <div id="searchResults" class="mt-4">
+    <script>
+      function search() {
+        // Get your Adzuna API credentials
+        var appId = '7bf9cd5a';
+        var appKey = '00f06e59f48a26dc9bb6457a9e5fc766';
+
+        // Get values from the form
+        var keywords = document.getElementById('keywords').value;
+        var country = document.getElementById('country').value;
+        var location = document.getElementById('location').value;
+        var distance = document.getElementById('distance').value;
+
+        // Build the Adzuna API URL
+        var apiUrl = `https://api.adzuna.com/v1/api/jobs/${country}/search/1?app_id=${appId}&app_key=${appKey}&what=${keywords}&where=${location}&distance=${distance}`;
+
+        // Fetch data from the Adzuna API
+        fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => displayResults(data))
+          .catch(error => console.error('Error fetching data:', error));
+      }
+
+      function displayResults(data) {
+        var resultsContainer = document.getElementById('searchResults');
+        resultsContainer.innerHTML = '';
+
+        if (!data || !data.results || data.results.length === 0) {
+          resultsContainer.innerHTML = 'No results found.';
+          return;
+        }
+
+        data.results.forEach(job => {
+          var resultContainer = document.createElement('div');
+          resultContainer.classList.add('mb-4', 'list-group-item', 'p-4', 'bg-light', 'rounded-5');
+
+          resultContainer.innerHTML = `
+            <span id="jobTitle"><strong>${job.title}</strong></span><br>
+            Location: <span id="location">${job.location.display_name}<span><br>
+            Description: ${job.description}<br>
+            Salary: ${job.salary ? `${job.salary_min} - ${job.salary_max} ${job.salary_currency}` : 'Not specified'}<br>
+            <a href="${job.redirect_url}" target="_blank" id="url">Learn More</a><br><br>
+          `;
+
+          resultsContainer.appendChild(resultContainer);
+        });
+      }
+    </script>
+  </div>
+
+<%- include("partials/footer.ejs") %>

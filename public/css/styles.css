@@ -1,0 +1,155 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  color: black;
+  padding-left: 10%;
+  padding-right: 10%;
+  background-color: #949494;
+  font-family: 'Cutive Mono', monospace;
+}
+
+main {
+  flex: 1;
+}
+
+h1{
+  text-align: center;
+  font-size: 3em;
+  font-family: 'Norican', cursive;
+}
+
+h2 {
+  font-family: 'Norican', cursive;
+}
+
+h3 {
+  text-align: center;
+  font-size: 2.3em;
+  font-family: 'Norican', cursive;
+}
+
+h4 {
+  text-align: center;
+}
+
+/* ----------------- footer ----------------- */
+
+footer {
+  padding: 20px; 
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 20px; 
+}
+
+/* ----------------- header ----------------- */
+
+#header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  position: relative; /* Set position to relative to stack with other elements */
+  z-index: 1;
+}
+
+#logo-container {
+  margin-right: 10px; /* Adjust spacing between logo and text as needed */
+}
+
+#logo-container img {
+  width: 130px; /* Adjust the width as needed */
+}
+
+#header-text {
+  text-align: center;
+  font-family: 'Limelight', sans-serif;
+  font-size: 6em;
+}
+
+/* ----------------- navbar ----------------- */
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    text-align: center;
+}
+
+li {
+   display: inline-block;
+
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: 'Arial';
+    border-bottom: 2px solid transparent;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+li a.active {
+    border-bottom: 2px solid skyblue;
+}
+
+/* ----------------- Button55 ----------------- */
+.button-55 {
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-55:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.button-55:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+.error-message {
+  color: red;
+}

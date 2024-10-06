@@ -1,0 +1,31 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container p-4 my-4 bg-light rounded-5">
+  <h2>Login</h2>
+    <% if (successMessage) { %>
+      <div class="alert alert-success" role="alert">
+        <%= successMessage %>
+      </div>
+    <% } %>
+  <!-- Your login form goes here -->
+  <form action="/user/login" method="post">
+    <!-- Your form fields (e.g., username and password) go here -->
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" class="form-control" placeholder="Enter username" required>
+    <br>
+    <label for="pwd">Password:</label>
+    <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Enter password" required>
+    <br>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form><br>
+    <% if (typeof error !== 'undefined' && error){ %>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+    <% } %>
+  <!-- New to Prosper? Join Now link -->
+  <p>New to Prosper? <a href="/user/create">Join Now</a></p>
+
+</div>
+
+<%- include("../partials/footer.ejs") %>

@@ -1,0 +1,40 @@
+<%- include("../partials/header.ejs") %> <div class="container p-4 my-4 bg-light rounded-5">
+  <h2> Create User </h2>
+  <br>
+  <form method="POST" action="/user/create" id="createUser">
+    <div>
+      <label> Username: </label>
+      <input name="username" value="<%= typeof username !== 'undefined' ? username : '' %>" class="form-control" placeholder="Enter username" required><% if (error) { %> <div class="error-message"><%= error %> </div><% } %>
+    </div>
+    <br>
+    <div>
+      <label> Password: </label>
+      <input name="pwd" value="" type="password" class="form-control" placeholder="Enter password" required minlength="6">
+    </div>
+    <br>
+    <div>
+      <label> Email: </label>
+      <input name="email" type="email" class="form-control" placeholder="Enter email" required>
+    </div>
+    <br>
+    <div>
+      <label for="position">Position:</label>
+      <select id="position" name="position">
+        <option value="applicant">Applicant</option>
+        <option value="recruiter">Recruiter</option>
+      </select>
+    </div>
+    <br>
+    <div>
+      <label> Profession: </label>
+      <input name="profession" value="" class="form-control" placeholder="Enter profession" required>
+    </div>
+    <br>
+    <div>
+      <label> Summary: </label>
+      <textarea name="summary" value="" class="form-control" placeholder="Enter summary" required></textarea>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">CREATE</button>
+  </form>
+</div><%- include("../partials/footer.ejs") %>

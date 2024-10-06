@@ -1,0 +1,18 @@
+<%- include("../partials/header.ejs") %>
+<div class="container p-4 my-4 bg-light rounded-5">
+  <h2>User Favorites</h2><br>
+  <div>
+    <% if(favorites.length > 0) { %>
+      <% for(fav in favorites) { %>
+        <strong><%=fav.job_title%></strong><br>
+        Company: <%=fav.company%><br>
+        Location: <%=fav.location%><br>
+        Date Posted: <%=fav.posted_date%><br>
+        <a href="<%=fav.url%>">View Details</a>
+      <%}%>
+      <%} else {%>
+      <span>No Favorites yet.</span>
+      <%}%>
+  </div>
+</div>
+<%- include("../partials/footer.ejs") %>

@@ -1,0 +1,44 @@
+  <%- include("../partials/header.ejs") %>
+
+  <div class="container p-4 my-4 bg-light rounded-5">
+    <h2>Edit Profile</h2>
+    <div class="button-container">
+      <form method="POST" action="/user/update/<%= user.username %>">
+        <div>
+          <label> Username: </label>
+          <input name="username" value="<%= user.username %>" class="form-control" placeholder="Enter username" required disabled>
+        </div><br>
+        <div>
+          <label> Email: </label>
+          <input type="email" name="email" value="<%= user.email %>" class="form-control" placeholder="Enter email" required>
+        </div><br>
+        <div>
+          <label> Password: </label>
+          <input type="password" name="pwd" class="form-control" placeholder="Enter new password">
+        </div><br>
+        <div>
+          <label> Profession: </label>
+          <input name="profession" value="<%= user.profession %>" class="form-control" placeholder="Enter profession">
+        </div><br>
+        <div>
+          <label> Summary: </label>
+          <textarea name="summary" class="form-control" placeholder="Enter summary"><%= user.summary %></textarea>
+        </div><br>
+        <div>
+          <label for="position">Position:</label>
+          <select id="position" name="position" class="form-control">
+            <option value="applicant" <%= user.position === 'applicant' ? 'selected' : '' %>>Applicant</option>
+            <option value="recruiter" <%= user.position === 'recruiter' ? 'selected' : '' %>>Recruiter</option>
+          </select>
+        </div><br>
+        <button type="submit" class="btn btn-primary">UPDATE</button>
+      </form>
+      <% if (typeof error !== 'undefined' && error){ %>
+        <div class="alert alert-danger" role="alert">
+          <%= error %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <%- include("../partials/footer.ejs") %>

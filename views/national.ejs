@@ -1,0 +1,89 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container p-4 my-4 bg-light rounded-5">
+  <h1>Search National Government</h1>
+  <h4>Powered by Career One Stop API</h4>
+
+  <form id="searchForm">
+    <div class="form-group">
+      <label for="keyword">Keyword:</label>
+      <input type="text" id="keyword" name="keyword" placeholder="Enter keyword" class="form-control" required>
+    </div><br>
+
+    <div class="form-group">
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location" placeholder="Enter city, state, or ZIP code" class="form-control" required>
+    </div><br>
+
+    <div class="form-group">
+      <label for="radius">Radius (in miles):</label>
+      <input type="text" id="radius" name="radius" value="20" class="form-control" required>
+    </div><br>
+
+    <div class="form-group">
+      <label for="sortColumns">Sort by:</label>
+      <select id="sortColumns" name="sortColumns" class="form-control">
+        <option value="0">Relevance</option>
+        <option value="jobtitle">Job Title</option>
+        <option value="company">Company</option>
+        <option value="location">Location</option>
+        <option value="acquisitiondate">Acquisition Date</option>
+      </select>
+    </div><br>
+
+    <button type="button" class="btn btn-primary button-55" onclick="search()">Search</button>
+  </form>
+</div>
+
+  <div id="jobResults" class="mt-4">
+  <script>
+    function search() {
+      var userId = 'd4mMTyPsymXL4Gu'; 
+      var apiKey = 'eZNs8jnd36Rj/Ta8f6195834DGwzlP5dVYMp32K1XomSHAm4SmwpF5uMyHDycMjbpXrWWLYLfsNviVTi/ZMtgA==';
+
+      var keyword = document.getElementById('keyword').value;
+      var location = document.getElementById('location').value;
+      var radius = document.getElementById('radius').value;
+      var sortColumns = document.getElementById('sortColumns').value;
+
+      var url = `https://api.careeronestop.org/v1/jobsearch/${userId}/${keyword}/${location}/${radius}/${sortColumns}/0/0/50/0`;
+
+      fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${apiKey}`
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        displayResults(data);
+      })
+      .catch(error => console.error('Error:', error));
+    }
+
+    function displayResults(response) {
+      var resultsContainer = document.getElementById('jobResults');
+      resultsContainer.innerHTML = '';
+
+      if (!response || !response.Jobs || response.Jobs.length === 0) {
+        resultsContainer.innerHTML = 'No results found.';
+        return;
+      }
+
+      response.Jobs.forEach(job => {
+        var resultContainer = document.createElement('div');
+        resultContainer.classList.add('mb-4', 'list-group-item', 'p-4', 'bg-light', 'rounded-5');
+
+        resultContainer.innerHTML = `
+          <strong><span id="jobTitle">${job.JobTitle}</span></strong><br>
+          Company: <span id="company">${job.Company}<span><br>
+          Location: <span id="location">${job.Location}</span><br>
+          Date Posted: <span id="postedDate"> ${job.AccquisitionDate}<span><br>
+          <a href="${job.URL}" target="_blank" id="url">View Details</a><br><br>`;
+
+        resultsContainer.appendChild(resultContainer);
+      });
+    }
+  </script>
+  </div>
+
+  <%- include("partials/footer.ejs") %>
